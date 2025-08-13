@@ -2,7 +2,7 @@
 
 import sys
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout
-from Features import WhiteboardWidget
+from Features import Whiteboard
 
 class TestWindow(QWidget):
     def __init__(self):
@@ -13,7 +13,7 @@ class TestWindow(QWidget):
         layout = QVBoxLayout(self)
 
         # Create whiteboard controller (handles widget + toolbar)
-        self.whiteboard_controller = WhiteboardWidget()
+        self.whiteboard_controller = Whiteboard()
 
         layout.addWidget(self.whiteboard_controller)
 

@@ -3,10 +3,10 @@ from PySide6.QtCore import Qt, QRectF, QPoint
 from PySide6.QtGui import QColor, QPainter, QPen, QImage, QAction
 from PySide6.QtWidgets import QWidget
 
-from toolbar import ToolbarMixin
-from slider import SliderMixin
-from tools import ToolsMixin
-from history import HistoryMixin
+from .toolbar import ToolbarMixin
+from .slider import SliderMixin
+from .tools import ToolsMixin
+from .history import HistoryMixin
 
 class Whiteboard(QWidget, ToolbarMixin, SliderMixin, ToolsMixin, HistoryMixin):
     def __init__(self):
@@ -15,6 +15,9 @@ class Whiteboard(QWidget, ToolbarMixin, SliderMixin, ToolsMixin, HistoryMixin):
         self.setMinimumSize(900, 600)
         self.setAttribute(Qt.WA_OpaquePaintEvent, True)
         self.setMouseTracking(True)
+        self.setStyleSheet("QWidget { outline: none; }")
+        self.setFocusPolicy(Qt.NoFocus)
+
 
         self.canvas = QImage(self.size(), QImage.Format_ARGB32_Premultiplied)
         self.canvas.fill(Qt.transparent)
@@ -49,7 +52,7 @@ class Whiteboard(QWidget, ToolbarMixin, SliderMixin, ToolsMixin, HistoryMixin):
     def paintEvent(self, _):
         p = QPainter(self)
         p.fillRect(self.rect(), QColor("#1f1f28"))
-        p.setPen(QColor("#247ca3"))
+        p.setPen(QColor("#1f1f28")) # show think outline but why?
         p.drawRect(self.rect().adjusted(0, 0, -1, -1))
 
         p.drawImage(0, 0, self.canvas)
