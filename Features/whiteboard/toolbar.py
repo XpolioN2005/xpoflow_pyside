@@ -5,7 +5,6 @@ from PySide6.QtSvg import QSvgRenderer
 class ToolbarMixin:
     def __init__(self):
         super().__init__()
-        # ✅ Load icons once
         self.icons = {}
         for name in ["pen", "eraser", "clear", "undo", "redo"]:
             self.icons[name] = QSvgRenderer(f"assets/icons/{name}.svg")
@@ -48,7 +47,7 @@ class ToolbarMixin:
             p.setPen(Qt.NoPen)
             p.drawEllipse(rect.adjusted(4, 4, -4, -4))
 
-        icon_margin = 8
+        icon_margin = 12
         icon_rect = rect.adjusted(icon_margin, icon_margin, -icon_margin, -icon_margin)
 
         if name == "color":

@@ -11,8 +11,11 @@ class ToolsMixin:
         self.update()
 
     def set_eraser(self):
-        self.active_tool = "eraser"
-        self.slider_visible = False
+        if self.active_tool == "eraser":
+            self.slider_visible = not self.slider_visible
+        else:
+            self.active_tool = "eraser"
+            self.slider_visible = False
         self.update()
 
     def clear_canvas(self):

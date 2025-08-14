@@ -141,3 +141,4 @@ class Whiteboard(QWidget, ToolbarMixin, SliderMixin, ToolsMixin, HistoryMixin):
         if self.active_tool == "pen":
             self.slider_visible = not self.slider_visible
             self.update()
+        
