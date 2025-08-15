@@ -12,7 +12,7 @@ class Whiteboard(QWidget, ToolbarMixin, SliderMixin, ToolsMixin, HistoryMixin):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Minimal Whiteboard")
-        self.setMinimumSize(900, 600)
+        # self.setMinimumSize(900, 600)
         self.setAttribute(Qt.WA_OpaquePaintEvent, True)
         self.setMouseTracking(True)
         self.setStyleSheet("QWidget { outline: none; }")

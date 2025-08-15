@@ -24,7 +24,7 @@ class ToolsMixin:
         self.update()
 
     def pick_color(self):
-        c = QColorDialog.getColor(self.pen_color, self, "Pick Color")
+        c = QColorDialog.getColor(self.pen_color, self, "Pick Color", )
         if c.isValid():
             self.pen_color = c
             self.update()

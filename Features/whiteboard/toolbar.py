@@ -10,7 +10,7 @@ class ToolbarMixin:
             self.icons[name] = QSvgRenderer(f"assets/icons/{name}.svg")
 
     def _compute_toolbar_rect(self):
-        w = 420.0
+        w = 340.0
         h = 48.0
         margin_bottom = 22.0
         x = (self.width() - w) / 2.0

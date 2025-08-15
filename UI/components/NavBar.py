@@ -13,7 +13,7 @@ class NavBar(QWidget):
 
     def __init__(self):
         super().__init__()
-        self.setFixedWidth(200)
+        self.setFixedWidth(150)
         self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Expanding)
 
         self.setStyleSheet(load_stylesheet("UI/stylesheet/navbar.qss"))
