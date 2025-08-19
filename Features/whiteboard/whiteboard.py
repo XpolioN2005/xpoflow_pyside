@@ -51,7 +51,7 @@ class Whiteboard(QWidget, ToolbarMixin, SliderMixin, ToolsMixin, HistoryMixin):
 
     def paintEvent(self, _):
         p = QPainter(self)
-        p.fillRect(self.rect(), QColor("#1f1f28"))
+        p.fillRect(self.rect(), QColor("#18181C"))
         p.setPen(QColor("#1f1f28")) # show think outline but why?
         p.drawRect(self.rect().adjusted(0, 0, -1, -1))
 
