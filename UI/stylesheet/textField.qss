@@ -1,0 +1,7 @@
+
+QTextEdit {
+	border: 1px solid #333;
+	border-radius: 5px;
+	background: transparent;
+	padding: 3px;
+	}

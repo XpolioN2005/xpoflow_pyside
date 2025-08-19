@@ -5,6 +5,7 @@ from PySide6.QtCore import Qt
 
 from UI.components.NavBar import NavBar
 from Features.whiteboard.whiteboard import Whiteboard
+from Features.brain_storm.brainStorm import TextCanvas
 
 class MainWindow(QMainWindow):
 	def __init__(self):
@@ -42,7 +43,7 @@ class MainWindow(QMainWindow):
 			case "projects":
 				new_widget = QLabel("📂 Projects Page")
 			case "brainstorm":
-				new_widget = QLabel("💡 Brainstorm Page")
+				new_widget = TextCanvas()
 			case "settings":
 				new_widget = QLabel("⚙ Settings Page")
 			case _:
