@@ -1,4 +1,3 @@
-import sys
 from PySide6.QtWidgets import QWidget, QTextEdit
 from PySide6.QtCore import Qt, QPoint
 from PySide6.QtGui import QMouseEvent
