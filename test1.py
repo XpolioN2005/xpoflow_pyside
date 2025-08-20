@@ -1,86 +1,45 @@
 import sys
 from PySide6.QtWidgets import (
-    QApplication, QMainWindow, QWidget, QTextEdit
+    QApplication, QMainWindow, QWidget, QVBoxLayout,
+    QHBoxLayout, QPushButton, QStackedWidget, QLabel
 )
-from PySide6.QtCore import Qt, QPoint
-from PySide6.QtGui import QMouseEvent
 
 
-class DraggableTextEdit(QTextEdit):
-    def __init__(self, parent, canvas):
-        super().__init__(parent)
-        self.canvas = canvas
-        self._dragging = False
-        self._drag_offset = QPoint()
-
-    def mousePressEvent(self, event: QMouseEvent):
-        if event.button() == Qt.RightButton:
-            # Right-click deletes this text box
-            self.canvas.text_boxes.remove(self)
-            self.deleteLater()
-        elif event.button() == Qt.LeftButton:
-            # Start dragging
-            self._dragging = True
-            self._drag_offset = event.position().toPoint()
-        super().mousePressEvent(event)
-
-    def mouseMoveEvent(self, event: QMouseEvent):
-        if self._dragging:
-            new_pos = self.mapToParent(event.position().toPoint() - self._drag_offset)
-            self.move(new_pos)
-
-    def mouseReleaseEvent(self, event: QMouseEvent):
-        if event.button() == Qt.LeftButton:
-            self._dragging = False
-        super().mouseReleaseEvent(event)
-
-
-class Canvas(QWidget):
+class MainScreen(QWidget):
     def __init__(self):
         super().__init__()
-        self.setStyleSheet("background-color: white;")
-        self.text_boxes = []
+        layout = QVBoxLayout()
 
-    def mousePressEvent(self, event: QMouseEvent):
-        if event.button() == Qt.LeftButton:
-            pos = event.position().toPoint()
+        # Top Nav
+        nav = QHBoxLayout()
+        self.home_btn = QPushButton("Home")
+        self.settings_btn = QPushButton("Settings")
+        nav.addWidget(self.home_btn)
+        nav.addWidget(self.settings_btn)
 
-            # Check if click is on an existing text box
-            for tb in self.text_boxes:
-                if tb.geometry().contains(pos):
-                    return  # Do nothing (click handled by text box itself)
+        # Stacked pages
+        self.stacked = QStackedWidget()
+        self.stacked.addWidget(QLabel("🏠 Home Screen"))
+        self.stacked.addWidget(QLabel("⚙️ Settings Screen"))
 
-            # Otherwise, add a new one
-            self.add_text_box(pos)
+        layout.addLayout(nav)
+        layout.addWidget(self.stacked)
+        self.setLayout(layout)
 
-    def add_text_box(self, pos: QPoint):
-        text_edit = DraggableTextEdit(self, self)
-        text_edit.setPlaceholderText("Type here...")
-        text_edit.move(pos)
-        text_edit.resize(150, 40)
-        text_edit.setStyleSheet("""
-            QTextEdit {
-                border: 1px solid #333;
-                border-radius: 5px;
-                background: #f9f9f9;
-                padding: 3px;
-            }
-        """)
-        text_edit.show()
-        text_edit.setFocus()
-        self.text_boxes.append(text_edit)
+        # Switch pages
+        self.home_btn.clicked.connect(lambda: self.stacked.setCurrentIndex(0))
+        self.settings_btn.clicked.connect(lambda: self.stacked.setCurrentIndex(1))
 
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Tap to Add / Right Click to Delete / Drag")
-        self.setGeometry(100, 100, 800, 600)
-        self.setCentralWidget(Canvas())
+        self.setWindowTitle("Top Nav with Screens")
+        self.setCentralWidget(MainScreen())
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
+    win = MainWindow()
+    win.show()
     sys.exit(app.exec())

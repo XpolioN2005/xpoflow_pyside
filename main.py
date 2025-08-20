@@ -10,7 +10,7 @@ from Features.brain_storm.brainStorm import TextCanvas
 class MainWindow(QMainWindow):
 	def __init__(self):
 		super().__init__()
-		self.setWindowTitle("NavBar test")
+		self.setWindowTitle("XpoFlow")
 		self.resize(900, 600)
 
 		central = QWidget()

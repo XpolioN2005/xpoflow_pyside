@@ -1,7 +1,9 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QPushButton, QSizePolicy, QScrollArea, QFrame
-from PySide6.QtCore import Qt, Signal
+from PySide6.QtCore import Qt, Signal, QSize
+from PySide6.QtGui import QIcon
 
 from Utils.load_stylesheet import load_stylesheet
+
 
 class NavBar(QWidget):
     # Signals for modular handling
@@ -13,7 +15,7 @@ class NavBar(QWidget):
 
     def __init__(self):
         super().__init__()
-        self.setFixedWidth(150)
+        self.setFixedWidth(135)
         self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Expanding)
 
         self.setStyleSheet(load_stylesheet("UI/stylesheet/navbar.qss"))
@@ -28,21 +30,24 @@ class NavBar(QWidget):
         top_layout.setContentsMargins(0, 0, 0, 0)
         top_layout.setSpacing(0)
 
-        # Create buttons
-        btn_home = QPushButton("🏠 Home")
-        btn_home.clicked.connect(self.homeClicked.emit)
+        # Helper to make button with icon + text
+        def make_btn(icon_path, text, slot):
+            btn = QPushButton(text)
+            btn.setIcon(QIcon(f"assets/icons/{icon_path}.svg"))
+            btn.setIconSize(QSize(20, 20))  # adjust size as needed
+            btn.clicked.connect(slot)
+            return btn
+
+        btn_home = make_btn("home", "Home", self.homeClicked.emit)
         top_layout.addWidget(btn_home)
 
-        btn_projects = QPushButton("📂 Projects")
-        btn_projects.clicked.connect(self.projectsClicked.emit)
+        btn_projects = make_btn("projects", "Projects", self.projectsClicked.emit)
         top_layout.addWidget(btn_projects)
 
-        btn_brainstorm = QPushButton("💡 Brainstorm")
-        btn_brainstorm.clicked.connect(self.brainstormClicked.emit)
+        btn_brainstorm = make_btn("brainstorm", "Brainstorm", self.brainstormClicked.emit)
         top_layout.addWidget(btn_brainstorm)
 
-        btn_whiteboard = QPushButton("📝 Whiteboard")
-        btn_whiteboard.clicked.connect(self.whiteboardClicked.emit)
+        btn_whiteboard = make_btn("whiteboard", "Whiteboard", self.whiteboardClicked.emit)
         top_layout.addWidget(btn_whiteboard)
 
         # Keep items packed at top
@@ -61,8 +66,7 @@ class NavBar(QWidget):
         bottom_layout = QVBoxLayout(bottom)
         bottom_layout.setContentsMargins(0, 0, 0, 0)
 
-        btn_settings = QPushButton("⚙ Settings")
-        btn_settings.clicked.connect(self.settingsClicked.emit)
+        btn_settings = make_btn("settings", "Settings", self.settingsClicked.emit)
         bottom_layout.addWidget(btn_settings)
 
         main_layout.addWidget(bottom)
