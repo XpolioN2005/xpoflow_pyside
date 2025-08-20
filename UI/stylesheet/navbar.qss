@@ -1,24 +1,24 @@
 /* ===== NAVBAR BASE ===== */
 QWidget {
-    background-color: #262837;
-    color: #ffffff;
+	background-color: #262837;
+	color: #ffffff;
 }
 
 /* ===== NAV BUTTONS ===== */
 QPushButton {
-    background: transparent;
-    border: none;
-    padding: 10px 14px;
-    text-align: left;
-    font-size: 14px;
-    color: #cccccc;
+	background: transparent;
+	border: none;
+	padding: 10px 14px;
+	text-align: left;
+	font-size: 14px;
+	color: #cccccc;
 }
 
 QPushButton:hover {
-    background-color: #3B3E55;
-    color: #ffffff;
+	background-color: #3B3E55;
+	color: #ffffff;
 }
 
 QPushButton:pressed {
-    background-color: #1F1D2C;
+	background-color: #1F1D2C;
 }
